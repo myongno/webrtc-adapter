@@ -36,13 +36,13 @@ for the version according to the user-agent string.
 
 ##### NPM
 Copy to desired location in your src tree or use a minify/vulcanize tool (node_modules is usually not published with the code).
-See [webrtc/samples repo](https://github.com/webrtc/samples) as an example on how you can do this.
+See [webrtc/samples repo](https://github.com/myongno/webrtc-samples) as an example on how you can do this.
 
 #### Prebuilt releases
 ##### Web
 In the [gh-pages branch](https://github.com/webrtcHacks/adapter/tree/gh-pages) prebuilt ready to use files can be downloaded/linked directly.
-Latest version can be found at https://webrtc.github.io/adapter/adapter-latest.js.
-Specific versions can be found at https://webrtc.github.io/adapter/adapter-N.N.N.js, e.g. https://webrtc.github.io/adapter/adapter-1.0.2.js.
+Latest version can be found at https://myongno.github.io/webrtc-adapter/adapter-latest.js.
+Specific versions can be found at https://myongno.github.io/webrtc-adapter/adapter-N.N.N.js, e.g. https://myongno.github.io/webrtc-adapter/adapter-1.0.2.js.
 
 ##### Bower
 You will find `adapter.js` in `bower_components/webrtc-adapter/`.
