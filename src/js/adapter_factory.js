@@ -12,6 +12,7 @@ import * as chromeShim from './chrome/chrome_shim';
 import * as edgeShim from './edge/edge_shim';
 import * as firefoxShim from './firefox/firefox_shim';
 import * as safariShim from './safari/safari_shim';
+import * as rdkWpeShim from './rdkWpe/rdkWpe_shim';
 import * as commonShim from './common_shim';
 
 // Shimming starts here.
@@ -20,6 +21,7 @@ export function adapterFactory({window} = {}, options = {
   shimFirefox: true,
   shimEdge: true,
   shimSafari: true,
+  shimRdkWpe: true,
 }) {
   // Utils.
   const logging = utils.log;
@@ -128,6 +130,29 @@ export function adapterFactory({window} = {}, options = {
       safariShim.shimTrackEventTransceiver(window);
       safariShim.shimGetUserMedia(window);
       safariShim.shimAudioContext(window);
+
+      commonShim.shimRTCIceCandidate(window);
+      commonShim.shimMaxMessageSize(window);
+      commonShim.shimSendThrowTypeError(window);
+      commonShim.removeAllowExtmapMixed(window);
+      break;
+    case 'RDK_WPE':
+      if (!rdkWpeShim || !options.shimRdkWpe) {
+        logging('RDK_WPE shim is not included in this adapter release.');
+        return adapter;
+      }
+      logging('adapter.js shimming RDK_WPE.');
+      // Export to the adapter global object visible in the browser.
+      adapter.browserShim = rdkWpeShim;
+
+      rdkWpeShim.shimRTCIceServerUrls(window);
+      rdkWpeShim.shimCreateOfferLegacy(window);
+      rdkWpeShim.shimCallbacksAPI(window);
+      rdkWpeShim.shimLocalStreamsAPI(window);
+      rdkWpeShim.shimRemoteStreamsAPI(window);
+      rdkWpeShim.shimTrackEventTransceiver(window);
+      rdkWpeShim.shimGetUserMedia(window);
+      rdkWpeShim.shimAudioContext(window);
 
       commonShim.shimRTCIceCandidate(window);
       commonShim.shimMaxMessageSize(window);

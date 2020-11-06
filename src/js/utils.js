@@ -180,8 +180,12 @@ export function detectBrowser(window) {
     result.version = extractVersion(navigator.userAgent,
         /Edge\/(\d+).(\d+)$/, 2);
   } else if (window.RTCPeerConnection &&
-      navigator.userAgent.match(/AppleWebKit\/(\d+)\./)) { // Safari.
-    result.browser = 'safari';
+      navigator.userAgent.match(/AppleWebKit\/(\d+)\./)) {
+    if (navigator.userAgent.match(/WPE/)) { // RDK_WPE
+      result.browser = 'RDK_WPE';
+    } else { // Safari.
+      result.browser = 'safari';
+    }
     result.version = extractVersion(navigator.userAgent,
         /AppleWebKit\/(\d+)\./, 1);
     result.supportsUnifiedPlan = window.RTCRtpTransceiver &&
